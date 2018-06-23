@@ -6,6 +6,7 @@ import Wallpaper from './Wallpaper';
 import ButtonSubmit from './ButtonSubmit';
 import {Actions, ActionConst} from 'react-native-router-flux';
 import SignupSection from './SignupSection';
+import FirebaseBackend from '../../backend';
 
 import Dimensions from 'Dimensions';
 
@@ -24,7 +25,9 @@ export default class LoginScreen extends Component {
   login = () => {
     console.log(this.state.username);
     console.log(this.state.password);
-    Actions.secondScreen();
+    //Actions.secondScreen();
+    FirebaseBackend.insert();
+    /*
     fetch('http://10.72.228.139:3000/users', {
       method: 'POST',
       headers: {
@@ -56,7 +59,7 @@ export default class LoginScreen extends Component {
 
     })
 
-    .done();
+    .done();*/
     
   }
 

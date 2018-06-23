@@ -38,7 +38,7 @@ export default class SIgnup extends React.Component {
   signupFn = () => {
     alert('Sign Up Successful');
 
-    fetch('http://172.20.103.9:3000/users', {
+    fetch('http://192.168.2.80:3000/users', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
