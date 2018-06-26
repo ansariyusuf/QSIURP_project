@@ -1,4 +1,4 @@
-import firebase from 'firebase';
+import * as firebase from 'firebase';
 
 class FirebaseBackend{
 
@@ -12,17 +12,43 @@ class FirebaseBackend{
         storageBucket: "",
         messagingSenderId: "522755047583"
     });
+
+    
     
   }
 
-        
+    data=null;
+    root_val=null;
 
-    insert(){
-            console.log('In the backend')
+    set_data(password,val){
+        
+        this.data=val;
+        console.log(this.data);
+        this.root_val= Object.values(this.data)[0];
+
+        if (this.data!==null){
+            if (this.root_val.password===password){
+                console.log('success');
+                return ('success');
+            }
+            else{
+                console.log('wrong password');
+                return ('wron password');
+            }
+        }
+        else{
+            console.log('user not found');
+            return('user not found');
+        }
+    }
+
+    insert(username,password,Andrew_ID){
+            console.log('Inserting!!!')
             firebase.database().ref('users/001').set(
                 {
-                    name: 'Yusuf',
-                    age: 20
+                    username: username,
+                    password: password,
+                    andrew_id: Andrew_ID
                 }
             ).then(() => {
                 console.log('INSERTED !');
@@ -31,7 +57,20 @@ class FirebaseBackend{
             });
         }
 
+    lookup(username,password){
+        
+        console.log('looking up')
+        console.log(firebase.database().ref('users').orderByChild('username').equalTo(username).on("value",(snapshot)=>{ return(this.set_data(password,snapshot.val()))}) );
+        
+
+        //this.database = firebase.database();
+        //const userId = firebase.auth().currentUser.uid;          
+        //firebase.database().ref('users').on("value", snapshot => { console.log(snapshot.val());});
+
    
 
 }
+
+}
+
 export default new FirebaseBackend();

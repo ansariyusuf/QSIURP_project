@@ -10,6 +10,7 @@ import {
   StyleSheet,
   Text,
   View,
+  AsyncStorage
 } from 'react-native'
 import PropTypes from 'prop-types'
 
@@ -18,6 +19,8 @@ import mainColor from './constants'
 import Email from './Email'
 import Separator from './Separator'
 import Tel from './Tel'
+
+import ProfileIcon from './ProfileIcon'
 
 const styles = StyleSheet.create({
   cardContainer: {
@@ -120,6 +123,51 @@ class Contact extends Component {
     ).isRequired,
   }
 
+  UserInfo=null;
+
+
+
+
+
+
+   componentDidMount() {
+      /*try{
+           AsyncStorage.setItem('user_data',"Hi")
+        }
+      catch(error){
+           console.log('in set');
+           console.log(error)
+          }*/
+
+
+
+          this.getData().then((data)=>{this.UserInfo=JSON.JSON.parse(data);
+          console.log(this.UserInfo);
+
+          this.setState({
+        isLoading: true
+      });
+
+
+      });
+
+
+  }
+
+
+  async getData () {
+    return AsyncStorage.getItem('user_data')
+
+  }
+
+
+
+
+
+
+
+  
+
   state = {
     telDS: new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2,
@@ -127,6 +175,9 @@ class Contact extends Component {
     emailDS: new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2,
     }).cloneWithRows(this.props.emails),
+
+    isLoading: false
+
   }
 
   onPressPlace = () => {
@@ -147,6 +198,15 @@ class Contact extends Component {
     )
   }
 
+
+
+
+
+     
+
+
+
+
   renderHeader = () => {
     const {
       avatar,
@@ -154,6 +214,8 @@ class Contact extends Component {
       name,
       address: { city, country },
     } = this.props
+
+
 
     return (
       <View style={styles.headerContainer}>
@@ -164,6 +226,7 @@ class Contact extends Component {
             uri: avatarBackground,
           }}
         >
+
           <View style={styles.headerColumn}>
             <Image
               style={styles.userImage}
@@ -171,6 +234,9 @@ class Contact extends Component {
                 uri: avatar,
               }}
             />
+                                                                  <ProfileIcon/>
+
+
             <Text style={styles.userNameText}>{name}</Text>
             <View style={styles.userAddressRow}>
               <View>
@@ -231,19 +297,32 @@ class Contact extends Component {
   )
 
   render() {
+    //this.get_data();
+
+if (this.state.isLoading) {
     return (
       <ScrollView style={styles.scroll}>
         <View style={styles.container}>
           <Card containerStyle={styles.cardContainer}>
             {this.renderHeader()}
+
             {this.renderTel()}
             {Separator()}
             {this.renderEmail()}
+
           </Card>
         </View>
       </ScrollView>
     )
+}
+
+return <View><Text> "hi" </Text> </View>
+
+
+
   }
+
+
 }
 
 export default Contact

@@ -7,10 +7,26 @@ import {
   TouchableOpacity,
   Animated,
   Easing,
+  KeyboardAvoidingView, 
+    AsyncStorage
 } from 'react-native';
 import {Actions, ActionConst} from 'react-native-router-flux';
 
-import arrowImg from '../images/left-arrow.png';
+import arrowImg from '../../images/left-arrow.png';
+
+import { createStackNavigator, createBottomTabNavigator } from 'react-navigation'
+
+
+import { Platform } from 'react-native'
+import { Icon } from 'react-native-elements'
+
+import Profile1 from '../../../screens/Profile1'
+import Options from '../../../screens/Profile3/Options'
+
+import ProfileLayout from './ProfileLayout'
+
+
+
 
 const SIZE = 40;
 
@@ -48,18 +64,11 @@ export default class SecondScreen extends React.Component {
       outputRange: [1, SIZE],
     });
 
+    console.log('in SecondScreen');
+    //Actions.ProfileLayout();
+
     return (
-      <View style={styles.container}>
-        <TouchableOpacity
-          onPress={this._onPress}
-          style={styles.button}
-          activeOpacity={1}>
-          <Image style={styles.image} source={arrowImg} />
-        </TouchableOpacity>
-        <Animated.View
-          style={[styles.circle, {transform: [{scale: changeScale}]}]}
-        />
-      </View>
+      <ProfileLayout/>
     );
   }
 }

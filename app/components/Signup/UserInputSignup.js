@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Dimensions from 'Dimensions';
 import {StyleSheet, View, TextInput, Image} from 'react-native';
 
-export default class UserInputSignup extends React.Component {
+export default class UserInput extends React.Component {
   render() {
     return (
       <View style={styles.inputWrapper}>
@@ -25,7 +25,7 @@ export default class UserInputSignup extends React.Component {
   }
 }
 
-UserInputSignup.propTypes = {
+UserInput.propTypes = {
   source: PropTypes.number.isRequired,
   placeholder: PropTypes.string.isRequired,
   secureTextEntry: PropTypes.bool,

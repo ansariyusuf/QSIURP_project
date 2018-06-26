@@ -72,6 +72,7 @@ export default class FormSignup extends React.Component {
   
 
   onChangeTextHandler = (e) => {
+  //console.log(e);
   this.props.onChangeText(e);
 
   }
@@ -79,15 +80,7 @@ export default class FormSignup extends React.Component {
   render() {
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.container}>
-        <UserInputSignup
-          source={usernameImg}
-          placeholder="Andrew_Id"
-          autoCapitalize={'none'}
-          returnKeyType={'done'}
-          autoCorrect={false}
-          onChangeTextHandler= {this.onChangeTextHandler}
-
-        />
+       
 
         <UserInputSignup
           source={usernameImg}
@@ -99,6 +92,15 @@ export default class FormSignup extends React.Component {
 
         />
 
+         <UserInputSignup
+          source={usernameImg}
+          placeholder="Andrew_Id"
+          autoCapitalize={'none'}
+          returnKeyType={'done'}
+          autoCorrect={false}
+          onChangeTextHandler= {this.onChangeTextHandler}
+
+        />
 
         <UserInputSignup
           source={passwordImg}
