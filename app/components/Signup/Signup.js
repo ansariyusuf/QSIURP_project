@@ -44,102 +44,73 @@ export default class SIgnup extends React.Component {
   entire_db=null;
   user_count=null;
 
-//+ this.user_count.toString()
-  set_data_1(First_name,Andrew_ID,password,re_enter,val){
-        
-        this.entire_db=val;
-        console.log(this.entire_db);
-        if (this.entire_db!==null){
-          this.user_count=Object.keys(this.entire_db).length+1;
-        }
-        else{
-          this.user_count=1;
-        }
-        
-        firebase.database().ref('users/00'+this.user_count.toString()).set(
+  insert_in(First_name,Andrew_ID,password,re_enter,path){
+    firebase.database().ref(path).set(
                 {
-                    username: First_name,
+                    Name: First_name,
                     password: password,
-                    Andrew_ID: Andrew_ID
+                    AndrewId: Andrew_ID,
+                    email: Andrew_ID+'@andrew.cmu.edu',
+                    image:'https://firebasestorage.googleapis.com/v0/b/qsiurp2018-24c40.appspot.com/o/scotty.jpg?alt=media&token=d18a50a4-0ed2-48b5-a149-e187bea17ca7',
+                    phone:'88888888'
+
                 }
             ).then(() => {
                 console.log('INSERTED !');
             }).catch((error) => {
                 console.log(error);
             });
+  }
+
+//+ this.user_count.toString()
+  set_data_1(First_name,Andrew_ID,password,re_enter,val){
+        
+        this.entire_db=val;
+        //console.log(this.entire_db);
+        if (this.entire_db!==null){
+          this.user_count=Object.keys(this.entire_db).length+1;
+        }
+        else{
+          this.user_count=1;
+        }
+        //console.log('about to insert');
+        this.insert_in(First_name,Andrew_ID,password,re_enter,'users/'+Andrew_ID)
+        
     }
 
   set_data(First_name,Andrew_ID,password,re_enter, val){
         
-        //this.data=val;
-        /*console.log(this.data);
+        this.data=val;
+        console.log(this.data);
         if(this.data!==null){
           alert('User already exists');
+          return ("getting out of here");
         }
-        else{*/
+        else{
           firebase.database().ref('users').on("value",(snapshot)=>{(this.set_data_1(First_name,Andrew_ID,password,re_enter,snapshot.val()))}) 
-        //}
+        }
     }
 
   insert(First_name,Andrew_ID,password,re_enter){
-        
-        //console.log('looking up')
-        console.log(firebase.database().ref('users').orderByChild('username').equalTo(First_name).on("value",(snapshot)=>{(this.set_data(First_name,Andrew_ID,password,re_enter,snapshot.val()))}) );
+
+    firebase.database().ref('users').orderByChild('AndrewId').equalTo(Andrew_ID).on("value",(snapshot)=>{(this.set_data(First_name,Andrew_ID,password,re_enter,snapshot.val()))});
   }
 
   signupFn = () => {
-    alert('Sign Up Successful');
+    //alert('Sign Up Successful');
 
     this.insert(this.state.First_name,this.state.Andrew_Id,this.state.Password,this.state.re_enter);
-
-    /*
-    fetch('http://192.168.2.80:3000/users', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        comp:'signup',
-        First_name: this.state.First_name,
-        Andrew_ID: this.state.Andrew_Id,
-        password: this.state.password,
-      })
-
-    })
-
-    .then((response)=> response.json())
-    .then ((res)=>{ 
-
-      if (res.success === true) {
-        //AsyncStorage.setItem('user',res.user);
-        //this.props.navigation.navigate('Profile');
-        Actions.loginScreen();
-        alert('Signup Successful');
-      }
-
-      else {
-        alert (res.message);
-      }
-
-    })
-
-    .done();*/
   }
 
 
 
   onChangeText = (e) => {
-    //console.log(this.state.First_name+' fname');
-    //console.log(this.state.Andrew_Id+' andrew');
-    //console.log(this.state.password+' pass');
-  //console.log('here')
-    //console.log(e);
+  
   if (e.category==='Andrew_Id'){
     this.state.Andrew_Id=e.text;
     //console.log(this.state.Andrew_Id+' andrew');
   }
-  else if (e.category==='First_name'){
+  else if (e.category==='Name'){
     this.state.First_name=e.text;
     //console.log(this.state.First_name+' fname');
   }

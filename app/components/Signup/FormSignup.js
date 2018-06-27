@@ -84,7 +84,7 @@ export default class FormSignup extends React.Component {
 
         <UserInputSignup
           source={usernameImg}
-          placeholder="First_name"
+          placeholder="Name"
           autoCapitalize={'none'}
           returnKeyType={'done'}
           autoCorrect={false}

@@ -39,8 +39,6 @@ export default class Form extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
-      password: '',
       showPass: true,
       press: false,
     };
@@ -56,18 +54,7 @@ export default class Form extends React.Component {
   
 
   onChangeTextHandler = (e) => {
-  //console.log(e);
   this.props.onChangeText(e);
-  /*if (e.category==='Username'){
-    this.state.username=e.text;
-  }
-  else{
-    this.state.password=e.text;
-  }
-  */
-  //console.log(this.state.username);
-  //console.log(this.state.password);
-
   }
 
   render() {
@@ -75,7 +62,7 @@ export default class Form extends React.Component {
       <KeyboardAvoidingView behavior="padding" style={styles.container}>
         <UserInput
           source={usernameImg}
-          placeholder="Username"
+          placeholder="AndrewId"
           autoCapitalize={'none'}
           returnKeyType={'done'}
           autoCorrect={false}

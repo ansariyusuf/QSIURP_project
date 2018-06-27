@@ -131,18 +131,9 @@ class Contact extends Component {
 
 
    componentDidMount() {
-      /*try{
-           AsyncStorage.setItem('user_data',"Hi")
-        }
-      catch(error){
-           console.log('in set');
-           console.log(error)
-          }*/
 
-
-
-          this.getData().then((data)=>{this.UserInfo=JSON.JSON.parse(data);
-          console.log(this.UserInfo);
+          this.getData().then((data)=>{this.UserInfo=JSON.parse(data);
+          //console.log(this.UserInfo);
 
           this.setState({
         isLoading: true
@@ -159,14 +150,6 @@ class Contact extends Component {
     return AsyncStorage.getItem('user_data')
 
   }
-
-
-
-
-
-
-
-  
 
   state = {
     telDS: new ListView.DataSource({
@@ -198,15 +181,6 @@ class Contact extends Component {
     )
   }
 
-
-
-
-
-     
-
-
-
-
   renderHeader = () => {
     const {
       avatar,
@@ -218,6 +192,7 @@ class Contact extends Component {
 
 
     return (
+
       <View style={styles.headerContainer}>
         <ImageBackground
           style={styles.headerBackgroundImage}
@@ -231,13 +206,15 @@ class Contact extends Component {
             <Image
               style={styles.userImage}
               source={{
-                uri: avatar,
+                uri: this.UserInfo.image,
               }}
+
             />
-                                                                  <ProfileIcon/>
+
+            <ProfileIcon/>
 
 
-            <Text style={styles.userNameText}>{name}</Text>
+            <Text style={styles.userNameText}>{this.UserInfo.Name}</Text>
             <View style={styles.userAddressRow}>
               <View>
                 <Icon
@@ -268,8 +245,8 @@ class Contact extends Component {
           <Tel
             key={`tel-${id}`}
             index={k}
-            name={name}
-            number={number}
+            name={this.UserInfo.Name}
+            number={this.UserInfo.phone}
             onPressSms={this.onPressSms}
             onPressTel={this.onPressTel}
           />
@@ -287,8 +264,8 @@ class Contact extends Component {
           <Email
             key={`email-${id}`}
             index={k}
-            name={name}
-            email={email}
+            name={this.UserInfo.Name}
+            email={this.UserInfo.email}
             onPressEmail={this.onPressEmail}
           />
         )

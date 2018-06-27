@@ -32,8 +32,7 @@ export default class ButtonSubmit extends React.Component {
   }
 
   _onPress() {
-    alert(this.state.username);
-    console.log('hello from button');
+    //console.log('hello from button');
     if (this.state.isLoading) return;
 
     this.setState({isLoading: true});
@@ -75,9 +74,9 @@ export default class ButtonSubmit extends React.Component {
       outputRange: [1, MARGIN],
     });
 
-    console.log(this.state.username);
-    console.log(this.state.password);
-    console.log(DEVICE_HEIGHT);
+    //console.log(this.state.username);
+    //console.log(this.state.password);
+    //console.log(DEVICE_HEIGHT);
 
     return (
       <View style={styles.container}>

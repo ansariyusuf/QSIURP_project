@@ -64,7 +64,7 @@ export default class SecondScreen extends React.Component {
       outputRange: [1, SIZE],
     });
 
-    console.log('in SecondScreen');
+    //console.log('in SecondScreen');
     //Actions.ProfileLayout();
 
     return (

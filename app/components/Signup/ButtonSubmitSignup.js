@@ -32,7 +32,7 @@ export default class ButtonSubmitSignup extends React.Component {
   }
 
   _onPress() {
-    alert(this.state.username);
+    
     console.log('hello from button');
     if (this.state.isLoading) return;
 

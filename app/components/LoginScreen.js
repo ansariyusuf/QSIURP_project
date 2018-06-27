@@ -21,7 +21,7 @@ export default class LoginScreen extends Component {
    constructor(props) {
     super(props);
     this.state = {
-      username: '',
+      AndrewId: '',
       password: '',
 
     };
@@ -38,18 +38,15 @@ export default class LoginScreen extends Component {
     data=null;
     root_val=null;
 
-    async set_data(username,password,val){
+    async set_data(AndrewId,password,val){
         
         this.data=val;
-        //console.log(this.data);
         this.root_val= Object.values(this.data)[0];
 
 
         if (this.data!==null){
             if (this.root_val.password===password){
                 console.log('success');
-
-               // const setting= AsyncStorage.setItem('user_data', JSON.stringify(this.root_val));
                try{
                     await AsyncStorage.setItem('user_data',JSON.stringify(this.root_val))
                 }
@@ -57,92 +54,37 @@ export default class LoginScreen extends Component {
                     console.log('in set');
                     console.log(error)
                 }
-               //this.getData();
 
-                console.log('after sync');
+                //console.log('after sync');
                 Actions.secondScreen();
                 
             }
             else{
                 console.log('wrong password');
-                return ('wron password');
             }
         }
         else{
             console.log('user not found');
-            return('user not found');
         }
     }
 
-
-    set_async= async(val)=> {
-      try{
-          await AsyncStorage.setItem('user_data',val)
-      }
-      catch(error){
-          console.log('in set');
-          console.log(error)
-      }
-    }
-
-    
-    
-    
-       
-    
-  
-
-    lookup(username,password){
+  lookup(AndrewId,password){
         
-        console.log('looking up')
-        console.log(firebase.database().ref('users').orderByChild('username').equalTo(username).on("value",(snapshot)=>{(this.set_data(username,password,snapshot.val()))}) );
+        //console.log('looking up')
+      firebase.database().ref('users').orderByChild('AndrewId').equalTo(AndrewId).on("value",(snapshot)=>{(this.set_data(AndrewId,password,snapshot.val()))});
   }
 
   login = () => {
-    console.log(this.state.username);
-    console.log(this.state.password);
-    //Actions.secondScreen();
-    this.lookup(this.state.username,this.state.password);
-    /*
-    fetch('http://10.72.228.139:3000/users', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        comp:'login',
-        username: this.state.username,
-        password: this.state.password,
-      })
-
-    })
-
-    .then((response)=> response.json())
-    .then ((res)=>{ 
-
-      if (res.success === true) {
-        //AsyncStorage.setItem('user',res.user);
-        
-        alert('Login successful');
-        //Actions.secondScreen();
-      }
-
-      else {
-        alert (res.message);
-      }
-
-
-    })
-
-    .done();*/
-    
+    //console.log(this.state.AndrewId);
+    //console.log(this.state.password);
+    this.lookup(this.state.AndrewId,this.state.password);
+  
   }
 
 
   onChangeText = (e) => {
-  if (e.category==='Username'){
-    this.state.username=e.text;
+  if (e.category==='AndrewId'){
+    this.state.AndrewId=e.text;
   }
   else{
     this.state.password=e.text;

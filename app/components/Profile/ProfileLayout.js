@@ -99,7 +99,7 @@ const Product1Stack = createStackNavigator(
   }
 )
 
-const HomeIcon = ({ focused, tintColor }) => (
+const test = ({ focused, tintColor }) => (
   <Icon
     name="circle"
     type="entypo"
@@ -108,9 +108,42 @@ const HomeIcon = ({ focused, tintColor }) => (
   />
 )
 
-const new_icon= 
+const HomeIcon= ({ focused, tintColor }) => (
   <Icon
-    name='rowing' />
+    reverse
+    name='home'
+    type="entypo"
+    size={26}
+    color={focused ? tintColor : 'red'}
+      //type='MaterialCommunityIcons'
+
+  />
+)
+
+  const ProfileIcon= 
+  ({ focused, tintColor }) => (
+  <Icon
+    reverse
+    name='baidu'
+    type="entypo"
+    size={26}
+    color={focused ? tintColor : 'red'}
+      //type='MaterialCommunityIcons'
+
+  />
+)
+
+  const GroupIcon= 
+  ({ focused, tintColor }) => (
+  <Icon
+    reverse
+    name='group'
+    size={26}
+    color={focused ? tintColor : 'red'}
+      //type='MaterialCommunityIcons'
+
+  />
+)
 
 const RootTabs = createBottomTabNavigator(
   {
@@ -118,14 +151,14 @@ const RootTabs = createBottomTabNavigator(
       screen: Profile1Stack,
       navigationOptions: {
         tabBarLabel: 'Profile1',
-        tabBarIcon: HomeIcon,
+        tabBarIcon: ProfileIcon,
       },
     },
     profile2: {
       screen: Profile2Stack,
       navigationOptions: {
         tabBarLabel: 'Profile2',
-        tabBarIcon: new_icon,
+        tabBarIcon: HomeIcon,
       },
     },
 
@@ -133,7 +166,7 @@ const RootTabs = createBottomTabNavigator(
       screen: Profile4Stack,
       navigationOptions: {
         tabBarLabel: 'Profile4',
-        tabBarIcon: HomeIcon,
+        tabBarIcon: GroupIcon,
       },
     },
 
